@@ -1,33 +1,38 @@
+
 import numpy as np
 import pandas as pd
-movie_data = pd.read_parquet("models/movie_data.parquet")
-final_similarity = np.load("models/movie_similarity.npy")
-movie_title = input("Type the movie name: ").strip().lower()
 
-movie_indices = np.flatnonzero(
-    movie_data["title_x"].str.lower().eq(movie_title).to_numpy()
-)
+class MovieRecommender:
 
-if len(movie_indices) == 0:
+    def __init__(self):
+        self.movie_data = pd.read_parquet(
+            "models/movie_data.parquet"
+        )
 
-    print("Movie not found!")
+        self.final_similarity = np.load(
+            "models/movie_similarity.npy"
+        )
 
-else:
+    def recommend(self, movie_title):
+        movie_title = movie_title.strip().lower()
 
-    movie_index = movie_indices[0]
+        movie_indices = np.flatnonzero(
+            self.movie_data["title_x"].str.lower().eq(movie_title).to_numpy()
+        )
 
-    # Get similarity scores
-    scores = final_similarity[movie_index].copy()
+        if len(movie_indices) == 0:
+            return None
 
-    # Exclude the movie itself
-    scores[movie_index] = -1
+        movie_index = movie_indices[0]
 
-    # Get top 5 similar movies
-    best_movies = np.argsort(scores)[-5:][::-1]
+        scores = self.final_similarity[movie_index].copy()
 
-    # Display recommendations
-    recommendations = movie_data.iloc[best_movies][
-        ["id", "title_x"]
-    ]
+        scores[movie_index] = -1
 
-    print(recommendations)
+        best_movies = np.argsort(scores)[-5:][::-1]
+
+        recommendations = self.movie_data.iloc[best_movies][
+            ["id", "title_x"]
+        ]
+
+        return recommendations
