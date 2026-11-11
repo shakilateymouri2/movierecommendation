@@ -3,3 +3,4 @@ data
 data
 embeddings.npy
 models/movie_similarity.npy
+models/movie_data.parquet
