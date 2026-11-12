@@ -13,7 +13,7 @@ class MovieRecommender:
             "models/movie_similarity.npy"
         )
 
-    def recommend(self, movie_title):
+    def recommend(self, movie_title,limit):
         movie_title = movie_title.strip().lower()
 
         movie_indices = np.flatnonzero(
@@ -29,10 +29,10 @@ class MovieRecommender:
 
         scores[movie_index] = -1
 
-        best_movies = np.argsort(scores)[-5:][::-1]
+        best_movies = np.argsort(scores)[::-1][:limit]
 
         recommendations = self.movie_data.iloc[best_movies][
-            ["id", "title_x"]
-        ]
+        ["id", "title_x"]
+        ].rename(columns={"title_x": "title"})
 
         return recommendations
