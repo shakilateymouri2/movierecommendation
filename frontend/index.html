@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">CineMatch</div>
+        <span class="nav-text">سیستم پیشنهاد فیلم</span>
+    </header>
+
+    <main>
+        <section class="hero">
+            <p class="subtitle">MOVIE DISCOVERY</p>
+
+            <h1>
+                فیلم بعدی خودت را
+                <span>پیدا کن!</span>
+            </h1>
+
+            <p class="description">
+                نام یک فیلم را وارد کن تا فیلم‌هایی مشابه آن به تو پیشنهاد دهیم.
+            </p>
+
+            <form id="recommendationForm" class="search-box">
+
+                <label for="movieTitle">نام فیلم</label>
+
+                <input
+                    type="text"
+                    id="movieTitle"
+                    placeholder="مثلاً Avatar"
+                    maxlength="50"
+                    required
+                >
+
+                <label for="limit">تعداد فیلم‌های پیشنهادی</label>
+
+                <select id="limit">
+                    <option value="5">۵ فیلم</option>
+                    <option value="10">۱۰ فیلم</option>
+                    <option value="15">۱۵ فیلم</option>
+                    <option value="20">۲۰ فیلم</option>
+                </select>
+
+                <button type="submit" id="searchButton">
+                    پیدا کردن فیلم‌ها
+                </button>
+
+            </form>
+
+            <p id="message"></p>
+        </section>
+
+        <section class="results-section">
+            <h2>فیلم‌های پیشنهادی</h2>
+
+            <div id="results" class="movie-grid">
+                <p class="empty-message">
+                    پیشنهادهای فیلم اینجا نمایش داده می‌شوند.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Made with ❤️ for movie lovers</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
